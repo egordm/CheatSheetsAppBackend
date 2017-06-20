@@ -11,6 +11,9 @@
 |
 */
 
-$app->get('/', function () use ($app) {
+/*$app->get('/', function () use ($app) {
     return $app->version();
-});
+});*/
+
+
+$app->get('/', 'MainController@index');
