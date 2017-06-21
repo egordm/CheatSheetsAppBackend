@@ -15,10 +15,10 @@ class CreateTags extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content');
+            $table->string('content');
         });
 
-        Schema::create('cheats_tags', function (Blueprint $table) {
+        Schema::create('cheat_tag', function (Blueprint $table) {
             $table->integer('cheat_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->primary(['cheat_id', 'tag_id']);
@@ -31,7 +31,7 @@ class CreateTags extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('cheat_groups_tags', function (Blueprint $table) {
+        Schema::create('cheat_group_tag', function (Blueprint $table) {
             $table->integer('cheat_group_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->primary(['cheat_group_id', 'tag_id']);
@@ -44,7 +44,7 @@ class CreateTags extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('cheat_sheets_tags', function (Blueprint $table) {
+        Schema::create('cheat_sheet_tag', function (Blueprint $table) {
             $table->integer('cheat_sheet_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->primary(['cheat_sheet_id', 'tag_id']);

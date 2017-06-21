@@ -11,7 +11,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 /**
  * App\User
  *
- * @mixin \Eloquent
+ * @mixin \Illuminate\Database\Eloquent\
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Category
  *
- * @mixin \Eloquent
+ * @mixin \Illuminate\Database\Eloquent\
  * @property int $id
  * @property string $title
  * @property string $description
@@ -25,8 +25,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatSheet[] $cheatSheets
  */
 class Category extends Model
 {
-
+    public function cheatSheets()
+    {
+        return $this->hasMany(CheatSheet::class);
+    }
 }

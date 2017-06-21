@@ -15,6 +15,7 @@ class MainController extends Controller
 {
     public function index() {
         //echo 'Hello world';
-        return Category::all();
+        $cat = Category::with('cheatSheets', 'cheatSheets.tags')->get();
+        return $cat;
     }
 }
