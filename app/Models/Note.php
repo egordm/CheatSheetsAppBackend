@@ -25,5 +25,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Note extends Model
 {
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
+    /**
+     * @param int $cheat_group_id
+     */
+    public function setCheatGroupId($cheat_group_id)
+    {
+        $this->cheat_group_id = $cheat_group_id;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
 }

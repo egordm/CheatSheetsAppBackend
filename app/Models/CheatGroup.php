@@ -42,4 +42,68 @@ class CheatGroup extends Model
     {
         return $this->hasMany(Cheat::class);
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param int $cheat_sheet_id
+     */
+    public function setCheatSheetId($cheat_sheet_id)
+    {
+        $this->cheat_sheet_id = $cheat_sheet_id;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param \Carbon\Carbon $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @param \Carbon\Carbon $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @param Cheat[] $cheats
+     */
+    public function setCheats($cheats)
+    {
+        $this->cheats = $cheats;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
 }

@@ -25,5 +25,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CheatContent extends Model
 {
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
+    /**
+     * @param int $cheat_id
+     */
+    public function setCheatId($cheat_id)
+    {
+        $this->cheat_id = $cheat_id;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
 }

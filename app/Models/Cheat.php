@@ -52,4 +52,94 @@ class Cheat extends Model
     {
         return $this->belongsToMany(Note::class);
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param int $cheat_group_id
+     */
+    public function setCheatGroupId($cheat_group_id)
+    {
+        $this->cheat_group_id = $cheat_group_id;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param bool $layout
+     */
+    public function setLayout($layout)
+    {
+        $this->layout = $layout;
+    }
+
+    /**
+     * @param string $usage
+     */
+    public function setUsage($usage)
+    {
+        $this->usage = $usage;
+    }
+
+    /**
+     * @param string $source
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    }
+
+    /**
+     * @param \Carbon\Carbon $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @param \Carbon\Carbon $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @param CheatContent[] $cheatContents
+     */
+    public function setCheatContents($cheatContents)
+    {
+        $this->cheatContents = $cheatContents;
+    }
+
+    /**
+     * @param Note[] $notes
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+
 }

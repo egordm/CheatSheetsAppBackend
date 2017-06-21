@@ -23,5 +23,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tag extends Model
 {
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
+    /**
+     * @param int $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
 }
