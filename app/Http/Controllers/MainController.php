@@ -9,10 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Category;
+
 class MainController extends Controller
 {
     public function index() {
-        echo 'Hello world';
-
+        //echo 'Hello world';
+        return Category::all();
     }
 }
