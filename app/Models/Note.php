@@ -22,6 +22,8 @@ namespace App\Models;
  */
 class Note extends BaseModel
 {
+    public $timestamps = false;
+
     /**
      * @param int $id
      */

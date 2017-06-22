@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CheatContent extends BaseModel
 {
+    public $timestamps = false;
+
     /**
      * @param int $id
      */
