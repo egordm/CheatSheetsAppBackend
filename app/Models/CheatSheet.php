@@ -121,7 +121,7 @@ class CheatSheet extends BaseModel
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Collection|array $data
+     * @param CheatSheet $data
      * @return \League\Fractal\Resource\Item
      */
     public static function transform($data)
