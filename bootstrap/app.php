@@ -100,7 +100,7 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/web.php';
 });
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+$app->group(['namespace' => 'API\Controllers', 'prefix' => 'api'], function ($app) {
     require __DIR__.'/../routes/api.php';
 });
 
