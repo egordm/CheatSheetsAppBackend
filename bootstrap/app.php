@@ -101,7 +101,7 @@ $app->get('/', function () {
     return '<h1>Hello world!</h1>';
 });
 
-$app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin'], function ($app) {
+$app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin', 'middleware' => 'auth'], function ($app) {
     require __DIR__.'/../routes/admin.php';
 });
 
