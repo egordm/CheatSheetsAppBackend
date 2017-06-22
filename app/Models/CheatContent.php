@@ -23,6 +23,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CheatContent whereContent($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CheatContent whereId($value)
  * @mixin \Illuminate\Database\Eloquent\
+ * @property-read \App\Models\CheatSheet $cheat_sheet
  */
 class CheatContent extends BaseModel
 {

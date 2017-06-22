@@ -28,6 +28,7 @@ namespace App\Models;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cheat[] $cheats
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
+ * @property-read \App\Models\CheatSheet $cheat_sheet
  */
 class CheatGroup extends BaseModel
 {

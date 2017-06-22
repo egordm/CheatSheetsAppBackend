@@ -12,3 +12,4 @@
 */
 
 $app->get('/', 'MainController@index');
+$app->post('/mass_add', 'MainController@massAdd');

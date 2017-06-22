@@ -21,6 +21,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Note whereContent($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Note whereId($value)
  * @mixin \Illuminate\Database\Eloquent\
+ * @property-read \App\Models\CheatSheet $cheat_sheet
  */
 class Note extends BaseModel
 {

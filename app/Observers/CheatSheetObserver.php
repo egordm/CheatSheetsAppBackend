@@ -22,6 +22,10 @@ class CheatSheetObserver extends BaseObserver
     public function changed(BaseModel $model)
     {
         \Cache::forget(Constants::CACHE_KEY_CATEGORIES);
-        \Cache::forget(Constants::CACHE_KEY_PREFIX_CHEATSHEET . $model->id);
+        self::invalidateCheatSheet($model->id);
+    }
+
+    public static function invalidateCheatSheet($id) {
+        \Cache::forget(Constants::CACHE_KEY_PREFIX_CHEATSHEET . $id);
     }
 }

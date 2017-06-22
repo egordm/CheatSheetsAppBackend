@@ -35,6 +35,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @mixin \Illuminate\Database\Eloquent\
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatContent[] $cheat_contents
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \App\Models\CheatSheet $cheat_sheet
  */
 class Cheat extends BaseModel
 {
