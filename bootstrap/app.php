@@ -105,14 +105,10 @@ if ($app->environment() !== 'production') {
 
 $app->get('/', function () {
     //TODO: redirect to app
-
-    $model = Tag::find(1)->first();
-    $model->content = $model->content.'#';
-    $model->save();
     return '<h1>Hello world!</h1>';
 });
 
-$app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin'/*, 'middleware' => 'auth'*/], function ($app) {
+$app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin', 'middleware' => 'auth'], function ($app) {
     require __DIR__.'/../routes/admin.php';
 });
 
