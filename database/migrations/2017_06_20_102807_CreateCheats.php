@@ -16,10 +16,10 @@ class CreateCheats extends Migration
         Schema::create('cheats', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cheat_group_id')->unsigned();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('layout')->unsigned();
-            $table->text('usage');
-            $table->string('source');
+            $table->text('usage')->nullable();
+            $table->string('source')->nullable();
             $table->timestamps();
 
             $table->foreign('cheat_group_id')

@@ -33,10 +33,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Cheat whereUsage($value)
  * @mixin \Illuminate\Database\Eloquent\
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatContent[] $cheatContents
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  */
-class Cheat extends Model
+class Cheat extends BaseModel
 {
     public function tags()
     {
@@ -48,17 +47,13 @@ class Cheat extends Model
         return $this->hasMany(CheatContent::class);
     }
 
-    public function notes()
-    {
-        return $this->belongsToMany(Note::class);
-    }
-
     /**
      * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
+        $this->exists = true;
     }
 
     /**
@@ -70,7 +65,7 @@ class Cheat extends Model
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description)
     {
@@ -86,7 +81,7 @@ class Cheat extends Model
     }
 
     /**
-     * @param string $usage
+     * @param string|null $usage
      */
     public function setUsage($usage)
     {
@@ -94,7 +89,7 @@ class Cheat extends Model
     }
 
     /**
-     * @param string $source
+     * @param string|null $source
      */
     public function setSource($source)
     {
@@ -121,16 +116,9 @@ class Cheat extends Model
      * @param CheatContent[] $cheatContents
      */
     public function setCheatContents($cheatContents)
-    {
-        $this->cheatContents = $cheatContents;
-    }
-
-    /**
-     * @param Note[] $notes
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
+    { //TODO make object? so convert string to object
+        if(empty($this->relations['cheatContents'])) $this->relations['cheatContents'] = [];
+        $this->relations['cheatContents'] = array_merge($this->relations['cheatContents'], $cheatContents);
     }
 
     /**
@@ -138,7 +126,8 @@ class Cheat extends Model
      */
     public function setTags($tags)
     {
-        $this->tags = $tags;
+        if(empty($this->relations['tags'])) $this->relations['tags'] = [];
+        $this->relations['tags'] = array_merge($this->relations['tags'], $tags);
     }
 
 

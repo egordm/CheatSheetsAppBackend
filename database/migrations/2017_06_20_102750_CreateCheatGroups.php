@@ -17,7 +17,7 @@ class CreateCheatgroups extends Migration
             $table->increments('id');
             $table->integer('cheat_sheet_id')->unsigned();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('cheat_sheet_id')

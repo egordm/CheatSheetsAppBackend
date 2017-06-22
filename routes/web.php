@@ -16,4 +16,4 @@
 });*/
 
 
-$app->get('/', 'MainController@index');
+$app->post('/', 'MainController@index');

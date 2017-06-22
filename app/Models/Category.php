@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereUpdatedAt($value)
- * @property-read \App\Models\CheatSheet[] $cheatSheets
+ * @property-read \App\Models\CheatSheet[] $cheat_sheets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatSheet[] $cheatSheets
  */
-class Category extends Model
+class Category extends BaseModel
 {
-    public $guarded = [];
 
     public function cheatSheets()
     {
@@ -42,6 +42,7 @@ class Category extends Model
     public function setId($id)
     {
         $this->id = $id;
+        $this->exists = true;
     }
 
     /**
@@ -53,7 +54,7 @@ class Category extends Model
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description)
     {
@@ -77,10 +78,11 @@ class Category extends Model
     }
 
     /**
-     * @param CheatSheet[]
+     * @param CheatSheet[] $cheat_sheets
      */
-    public function setCheatSheets($cheatSheets)
+    public function setCheatSheets($cheat_sheets)
     {
-        $this->cheatSheets = $cheatSheets;
+        if(empty($this->relations['cheatSheets'])) $this->relations['cheatSheets'] = [];
+        $this->relations['cheatSheets'] = array_merge($this->relations['cheatSheets'], $cheat_sheets);
     }
 }

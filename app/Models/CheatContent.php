@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CheatContent whereId($value)
  * @mixin \Illuminate\Database\Eloquent\
  */
-class CheatContent extends Model
+class CheatContent extends BaseModel
 {
     /**
      * @param int $id

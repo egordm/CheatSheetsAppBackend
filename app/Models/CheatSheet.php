@@ -9,9 +9,6 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
-
-
 /**
  * App\Models\CheatSheet
  *
@@ -33,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatGroup[] $cheatGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  */
-class CheatSheet extends Model
+class CheatSheet extends BaseModel
 {
     public function tags()
     {
@@ -51,6 +48,7 @@ class CheatSheet extends Model
     public function setId($id)
     {
         $this->id = $id;
+        $this->exists = true;
     }
 
     /**
@@ -70,7 +68,7 @@ class CheatSheet extends Model
     }
 
     /**
-     * @param string $subtitle
+     * @param string|null $subtitle
      */
     public function setSubtitle($subtitle)
     {
@@ -78,7 +76,7 @@ class CheatSheet extends Model
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description)
     {
@@ -106,7 +104,8 @@ class CheatSheet extends Model
      */
     public function setCheatGroups($cheatGroups)
     {
-        $this->cheatGroups = $cheatGroups;
+        if(empty($this->relations['cheatGroups'])) $this->relations['cheatGroups'] = [];
+        $this->relations['cheatGroups'] = array_merge($this->relations['cheatGroups'], $cheatGroups);
     }
 
     /**
@@ -114,7 +113,8 @@ class CheatSheet extends Model
      */
     public function setTags($tags)
     {
-        $this->tags = $tags;
+        if(empty($this->relations['tags'])) $this->relations['tags'] = [];
+        $this->relations['tags'] = array_merge($this->relations['tags'], $tags);
     }
 
 

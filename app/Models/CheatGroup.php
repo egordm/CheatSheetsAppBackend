@@ -9,9 +9,6 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
-
-
 /**
  * App\Models\CheatGroup
  *
@@ -30,8 +27,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Illuminate\Database\Eloquent\
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cheat[] $cheats
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
  */
-class CheatGroup extends Model
+class CheatGroup extends BaseModel
 {
     public function tags()
     {
@@ -43,12 +41,18 @@ class CheatGroup extends Model
         return $this->hasMany(Cheat::class);
     }
 
+    public function notes()
+    {
+        return $this->belongsToMany(Note::class);
+    }
+
     /**
      * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
+        $this->exists = true;
     }
 
     /**
@@ -68,7 +72,7 @@ class CheatGroup extends Model
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description)
     {
@@ -92,11 +96,21 @@ class CheatGroup extends Model
     }
 
     /**
+     * @param Note[] $notes
+     */
+    public function setNotes($notes)
+    {
+        if(empty($this->relations['notes'])) $this->relations['notes'] = [];
+        $this->relations['notes'] = array_merge($this->relations['notes'], $notes);
+    }
+
+    /**
      * @param Cheat[] $cheats
      */
     public function setCheats($cheats)
     {
-        $this->cheats = $cheats;
+        if(empty($this->relations['cheats'])) $this->relations['cheats'] = [];
+        $this->relations['cheats'] = array_merge($this->relations['cheats'], $cheats);
     }
 
     /**
@@ -104,6 +118,7 @@ class CheatGroup extends Model
      */
     public function setTags($tags)
     {
-        $this->tags = $tags;
+        if(empty($this->relations['tags'])) $this->relations['tags'] = [];
+        $this->relations['tags'] = array_merge($this->relations['tags'], $tags);
     }
 }

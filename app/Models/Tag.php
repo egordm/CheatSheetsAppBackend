@@ -9,9 +9,6 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
-
-
 /**
  * App\Models\Tag
  *
@@ -21,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereId($value)
  * @mixin \Illuminate\Database\Eloquent\
  */
-class Tag extends Model
+class Tag extends BaseModel
 {
     /**
      * @param int $id
