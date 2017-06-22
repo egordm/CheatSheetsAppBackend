@@ -10,6 +10,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 
 /**
@@ -37,6 +38,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cheat extends BaseModel
 {
+    use BelongsToThrough;
+
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -45,6 +49,11 @@ class Cheat extends BaseModel
     public function cheat_contents()
     {
         return $this->hasMany(CheatContent::class);
+    }
+
+    public function cheat_sheet()
+    {
+        return $this->belongsToThrough(CheatSheet::class, CheatGroup::class);
     }
 
     /**

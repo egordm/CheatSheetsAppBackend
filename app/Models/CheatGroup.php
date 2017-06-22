@@ -46,6 +46,11 @@ class CheatGroup extends BaseModel
         return $this->hasMany(Note::class);
     }
 
+    public function cheat_sheet()
+    {
+        return $this->belongsTo(CheatSheet::class);
+    }
+
     /**
      * @param int $id
      */
@@ -100,7 +105,7 @@ class CheatGroup extends BaseModel
      */
     public function setNotes($notes)
     {
-        if(empty($this->relations['notes'])) $this->relations['notes'] = [];
+        if (empty($this->relations['notes'])) $this->relations['notes'] = [];
         $this->relations['notes'] = array_merge($this->relations['notes'], $notes);
     }
 
@@ -109,7 +114,7 @@ class CheatGroup extends BaseModel
      */
     public function setCheats($cheats)
     {
-        if(empty($this->relations['cheats'])) $this->relations['cheats'] = [];
+        if (empty($this->relations['cheats'])) $this->relations['cheats'] = [];
         $this->relations['cheats'] = array_merge($this->relations['cheats'], $cheats);
     }
 
@@ -118,7 +123,7 @@ class CheatGroup extends BaseModel
      */
     public function setTags($tags)
     {
-        if(empty($this->relations['tags'])) $this->relations['tags'] = [];
+        if (empty($this->relations['tags'])) $this->relations['tags'] = [];
         $this->relations['tags'] = array_merge($this->relations['tags'], $tags);
     }
 }

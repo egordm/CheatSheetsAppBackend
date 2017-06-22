@@ -10,6 +10,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 
 /**
@@ -25,7 +26,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CheatContent extends BaseModel
 {
+    use BelongsToThrough;
+
     public $timestamps = false;
+
+    public function cheat_sheet()
+    {
+        return $this->belongsToThrough(CheatSheet::class, [CheatGroup::class, Cheat::class]);
+    }
 
     /**
      * @param int $id

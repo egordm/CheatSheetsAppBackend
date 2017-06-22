@@ -8,6 +8,8 @@
 
 namespace App\Models;
 
+use Znck\Eloquent\Traits\BelongsToThrough;
+
 
 /**
  * App\Models\Note
@@ -22,6 +24,13 @@ namespace App\Models;
  */
 class Note extends BaseModel
 {
+    use BelongsToThrough;
+
+    public function cheat_sheet()
+    {
+        return $this->belongsToThrough(CheatSheet::class, CheatGroup::class);
+    }
+
     public $timestamps = false;
 
     /**

@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "~2.2",
         "netresearch/jsonmapper": "^1.1",
         "doctrine/dbal": "^2.5",
-        "league/fractal": "^0.16.0"
+        "league/fractal": "^0.16.0",
+        "znck/belongs-to-through": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

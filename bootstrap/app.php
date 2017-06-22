@@ -1,6 +1,10 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Cheat;
+use App\Models\CheatContent;
+use App\Models\CheatGroup;
+use App\Models\CheatSheet;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -100,6 +104,11 @@ if ($app->environment() !== 'production') {
 
 $app->get('/', function () {
     //TODO: redirect to app
+
+    $model = CheatContent::find(2873)->first();
+    //$model->title = $model->title.'#';
+    echo $model->cheat_sheet;
+   // $model->save();
     return '<h1>Hello world!</h1>';
 });
 
