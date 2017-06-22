@@ -47,7 +47,9 @@ class Tag extends BaseModel
     public function getCheatSheets() {
         $ret = [];
         if(!empty($this->cheat_sheet)) {
-            $ret = array_merge($ret, $this->cheat_sheet);
+            foreach ($this->cheat_sheet as $cheatSheet) {
+                array_push($ret, $cheatSheet);
+            }
         }
         if(!empty($this->cheat_group)) {
             foreach ($this->cheat_group as $group) {
