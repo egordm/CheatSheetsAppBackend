@@ -25,13 +25,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereUpdatedAt($value)
- * @property-read \App\Models\CheatSheet[] $cheat_sheets
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatSheet[] $cheatSheets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatSheet[] $cheat_sheets
  */
 class Category extends BaseModel
 {
 
-    public function cheatSheets()
+    public function cheat_sheets()
     {
         return $this->hasMany(CheatSheet::class);
     }
@@ -82,7 +81,7 @@ class Category extends BaseModel
      */
     public function setCheatSheets($cheat_sheets)
     {
-        if(empty($this->relations['cheatSheets'])) $this->relations['cheatSheets'] = [];
-        $this->relations['cheatSheets'] = array_merge($this->relations['cheatSheets'], $cheat_sheets);
+        if(empty($this->relations['cheat_sheets'])) $this->relations['cheat_sheets'] = [];
+        $this->relations['cheat_sheets'] = array_merge($this->relations['cheat_sheets'], $cheat_sheets);
     }
 }

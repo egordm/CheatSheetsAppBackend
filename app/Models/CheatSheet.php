@@ -27,7 +27,7 @@ namespace App\Models;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CheatSheet whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\CheatSheet whereUpdatedAt($value)
  * @mixin \Illuminate\Database\Eloquent\
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatGroup[] $cheatGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatGroup[] $cheat_groups
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  */
 class CheatSheet extends BaseModel
@@ -37,7 +37,7 @@ class CheatSheet extends BaseModel
         return $this->belongsToMany(Tag::class);
     }
 
-    public function cheatGroups()
+    public function cheat_groups()
     {
         return $this->hasMany(CheatGroup::class);
     }
@@ -104,8 +104,8 @@ class CheatSheet extends BaseModel
      */
     public function setCheatGroups($cheatGroups)
     {
-        if(empty($this->relations['cheatGroups'])) $this->relations['cheatGroups'] = [];
-        $this->relations['cheatGroups'] = array_merge($this->relations['cheatGroups'], $cheatGroups);
+        if(empty($this->relations['cheat_groups'])) $this->relations['cheat_groups'] = [];
+        $this->relations['cheat_groups'] = array_merge($this->relations['cheat_groups'], $cheatGroups);
     }
 
     /**

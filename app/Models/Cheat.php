@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Cheat whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Cheat whereUsage($value)
  * @mixin \Illuminate\Database\Eloquent\
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatContent[] $cheatContents
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatContent[] $cheat_contents
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  */
 class Cheat extends BaseModel
@@ -42,7 +42,7 @@ class Cheat extends BaseModel
         return $this->belongsToMany(Tag::class);
     }
 
-    public function cheatContents()
+    public function cheat_contents()
     {
         return $this->hasMany(CheatContent::class);
     }
@@ -117,8 +117,8 @@ class Cheat extends BaseModel
      */
     public function setCheatContents($cheatContents)
     { //TODO make object? so convert string to object
-        if(empty($this->relations['cheatContents'])) $this->relations['cheatContents'] = [];
-        $this->relations['cheatContents'] = array_merge($this->relations['cheatContents'], $cheatContents);
+        if(empty($this->relations['cheat_contents'])) $this->relations['cheat_contents'] = [];
+        $this->relations['cheat_contents'] = array_merge($this->relations['cheat_contents'], $cheatContents);
     }
 
     /**
