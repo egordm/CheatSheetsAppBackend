@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
@@ -79,7 +81,7 @@ $app->singleton(
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 
 if ($app->environment() !== 'production') {
     $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
