@@ -43,7 +43,7 @@ class CheatGroup extends BaseModel
 
     public function notes()
     {
-        return $this->belongsToMany(Note::class);
+        return $this->hasMany(Note::class);
     }
 
     /**

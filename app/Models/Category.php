@@ -9,7 +9,8 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Transformers\CategoryTransformer;
+use League\Fractal\Resource\Collection;
 
 /**
  * App\Models\Category
@@ -83,5 +84,14 @@ class Category extends BaseModel
     {
         if(empty($this->relations['cheat_sheets'])) $this->relations['cheat_sheets'] = [];
         $this->relations['cheat_sheets'] = array_merge($this->relations['cheat_sheets'], $cheat_sheets);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection|array $data
+     * @return \League\Fractal\Resource\Collection
+     */
+    public static function transformArray($data)
+    {
+        return new Collection($data, new CategoryTransformer());
     }
 }

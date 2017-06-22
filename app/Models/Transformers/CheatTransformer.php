@@ -22,7 +22,7 @@ class CheatTransformer extends TransformerAbstract
     {
         $ret =  [
             'description' => $cheat->description,
-            'layout' => (boolean)$cheat->layout,
+            'layout' => $cheat->layout,
             'usage' => $cheat->usage,
             'source' => $cheat->source,
             'cheat_contents' => ContentDataSerializer::serialize($cheat->cheat_contents),

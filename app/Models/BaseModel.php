@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
  *
  * @mixin \Eloquent
  */
-class BaseModel extends Model
+abstract class BaseModel extends Model
 {
     public function push()
     {
@@ -27,11 +27,6 @@ class BaseModel extends Model
         // the relationships and save each model via this "push" method, which allows
         // us to recurse into all of these nested relations for the model instance.
 
-        //TODO: set id
-
-        /*for($i = 0; $i < count($cheat_sheets); $i++) {
-            $cheat_sheets[$i]->category_id = $this->id;
-        }*/
         foreach ($this->relations as $models) {
             foreach (Collection::make($models) as $model) {
                 $foreign_key = $this->getForeignKey();

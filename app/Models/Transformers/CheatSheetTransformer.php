@@ -16,13 +16,14 @@ use League\Fractal\TransformerAbstract;
 
 class CheatSheetTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = [
+    protected $availableIncludes = [
         'cheat_groups'
     ];
 
     public function transform(CheatSheet $cheatSheet)
     {
         return [
+            'id' => $cheatSheet->id,
             'title' => $cheatSheet->title,
             'subtitle' => $cheatSheet->subtitle,
             'description' => $cheatSheet->description,

@@ -7,6 +7,9 @@
  */
 
 namespace App\Models;
+use App\Models\Transformers\CheatSheetTransformer;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 
 
 /**
@@ -117,5 +120,21 @@ class CheatSheet extends BaseModel
         $this->relations['tags'] = array_merge($this->relations['tags'], $tags);
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection|array $data
+     * @return \League\Fractal\Resource\Item
+     */
+    public static function transform($data)
+    {
+        return new Item($data, new CheatSheetTransformer());
+    }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection|array $data
+     * @return \League\Fractal\Resource\Collection
+     */
+    public static function transformArray($data)
+    {
+        return new Collection($data, new CheatSheetTransformer());
+    }
 }
