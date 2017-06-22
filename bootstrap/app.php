@@ -62,9 +62,9 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ $app->singleton(
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 if ($app->environment() !== 'production') {
@@ -96,8 +96,13 @@ if ($app->environment() !== 'production') {
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../routes/web.php';
+$app->get('/', function () {
+    //TODO: redirect to app
+    return '<h1>Hello world!</h1>';
+});
+
+$app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin'], function ($app) {
+    require __DIR__.'/../routes/admin.php';
 });
 
 $app->group(['namespace' => 'API\Controllers', 'prefix' => 'api'], function ($app) {

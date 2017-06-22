@@ -11,9 +11,4 @@
 |
 */
 
-/*$app->get('/', function () use ($app) {
-    return $app->version();
-});*/
-
-
-$app->post('/', 'MainController@index');
+$app->get('/', 'MainController@index');
