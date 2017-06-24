@@ -13,3 +13,4 @@
 
 $app->get('/', 'MainController@index');
 $app->post('/mass_add', 'MainController@massAdd');
+$app->post('/add_cheat_sheet/{cat_id}', 'MainController@addCheatSheet');
