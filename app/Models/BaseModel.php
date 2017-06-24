@@ -21,13 +21,14 @@ abstract class BaseModel extends Model
 {
     public function push()
     {
+        $temp_rels = $this->relations; //IMPORTANT: because observer might mess this up after save
         if (!$this->save()) return false;
 
         // To sync all of the relationships to the database, we will simply spin through
         // the relationships and save each model via this "push" method, which allows
         // us to recurse into all of these nested relations for the model instance.
 
-        foreach ($this->relations as $models) {
+        foreach ($temp_rels as $models) {
             foreach (Collection::make($models) as $model) {
                 $foreign_key = $this->getForeignKey();
                 $model->$foreign_key = $this->id;
