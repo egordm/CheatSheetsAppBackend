@@ -31,8 +31,15 @@ abstract class BaseModel extends Model
         foreach ($temp_rels as $models) {
             foreach (Collection::make($models) as $model) {
                 $foreign_key = $this->getForeignKey();
-                $model->$foreign_key = $this->id;
-                if (!$model->push()) return false;
+                $model_table = $model->getTable();
+                if (\Schema::hasColumn($model_table, $foreign_key)) { // One to many
+                    $model->$foreign_key = $this->id;
+                    if (!$model->push()) return false;
+                } else if(method_exists($this, $model_table) ){ //Many to many
+                    $ret = $model->push();
+                    if(!$ret) return false;
+                    $this->$model_table()->attach($model->id);
+                }
             }
         }
 

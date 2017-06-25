@@ -69,6 +69,8 @@ class MainController extends Controller
         try {
             $cheatsheet->push();
         } catch (Exception $e) {
+            echo $e->getMessage();
+            //echo json_encode($e->getTrace());
             \DB::rollback();
         } finally {
             \DB::commit();

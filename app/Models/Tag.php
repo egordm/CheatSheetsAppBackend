@@ -13,7 +13,7 @@ namespace App\Models;
  * App\Models\Tag
  *
  * @property int $id
- * @property int $content
+ * @property string $content
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereContent($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereId($value)
  * @mixin \Illuminate\Database\Eloquent\
@@ -73,7 +73,7 @@ class Tag extends BaseModel
     }
 
     /**
-     * @param int $content
+     * @param string $content
      */
     public function setContent($content)
     {
