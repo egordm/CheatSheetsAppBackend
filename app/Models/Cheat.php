@@ -19,7 +19,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property int $id
  * @property int $cheat_group_id
  * @property string $description
- * @property bool $layout
+ * @property int $layout
  * @property string $usage
  * @property string $source
  * @property \Carbon\Carbon $created_at
@@ -83,7 +83,7 @@ class Cheat extends BaseModel
     }
 
     /**
-     * @param bool $layout
+     * @param int $layout
      */
     public function setLayout($layout)
     {
