@@ -22,7 +22,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 40000, function () {
+        $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
             $raw_data = Category::with('cheat_sheets', 'cheat_sheets.tags')->get();
             $data = Category::transformArray($raw_data);
             return $this->getManager()->createData($data)->toArray();
