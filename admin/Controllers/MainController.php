@@ -3,12 +3,15 @@
 namespace Admin\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BaseModel;
 use App\Models\Category;
+use App\Models\CheatGroup;
 use App\Models\CheatSheet;
 use App\Models\Serializers\FractalDataSerializer;
 use App\Models\Transformers\CategoryTransformer;
 use App\Models\Transformers\CheatSheetTransformer;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use JsonMapper;
 use League\Fractal\Manager;
@@ -31,56 +34,77 @@ class MainController extends Controller
     public function massAdd(Request $request)
     {
         ini_set('max_execution_time', 0);
-        $content_my = $request->getContent();
 
-        $mapper = new JsonMapper();
-        $mapper->bIgnoreVisibility = true;
-        $contact = $mapper->mapArray(json_decode($content_my), [], Category::class);
+        /*** @var $categories Category[] */
+        $categories = $this->jsonToModels($request->getContent(), Category::class);
 
-        \DB::beginTransaction();
-        try {
-            foreach ($contact as $con) {
-                $con->push();
-            }
-        } catch (Exception $e) {
-            \DB::rollback();
-        } finally {
-            \DB::commit();
-        }
 
-        $resource = new Collection($contact, new CategoryTransformer());
+        if($this->tryPush($categories))
+            return JsonResponse::create(['success'=>false]);
 
-        $manager = new Manager();
-        $manager->setSerializer(new FractalDataSerializer());
-        return $manager->createData($resource)->toArray();
+        return JsonResponse::create(['success'=>true]);
     }
 
     public function addCheatSheet(Request $request, $cat_id)
     {
         ini_set('max_execution_time', 0);
-        $content_my = $request->getContent();
 
-        $mapper = new JsonMapper();
-        $mapper->bIgnoreVisibility = true;
-        $cheatsheet = $mapper->map(json_decode($content_my), new CheatSheet());
+        /*** @var $cheatsheet CheatSheet */
+        $cheatsheet = $this->jsonToModel($request->getContent(), new CheatSheet());
         $cheatsheet->category_id = $cat_id;
 
+        if($this->tryPush($cheatsheet))
+            return JsonResponse::create(['success'=>false]);
+
+        return JsonResponse::create(['success'=>true]);
+    }
+
+    public function addGroup(Request $request, $cheatsheet_id)
+    {
+        ini_set('max_execution_time', 0);
+
+        /*** @var $cheat_group CheatGroup */
+        $cheat_group = $this->jsonToModel($request->getContent(), new CheatGroup());
+        $cheat_group->cheat_sheet_id = $cheatsheet_id;
+
+        if($this->tryPush($cheat_group))
+            return JsonResponse::create(['success'=>false]);
+
+        return JsonResponse::create(['success'=>true]);
+    }
+
+    /**
+     * @param $models BaseModel|BaseModel[]
+     * @return Exception|null
+     */
+    private function tryPush($models) {
+        $ret = null;
         \DB::beginTransaction();
         try {
-            $cheatsheet->push();
+            if(!is_array($models)) $models = [$models];
+            foreach ($models as $model) {
+                $model->push();
+            }
         } catch (Exception $e) {
-            echo $e->getMessage();
-            //echo json_encode($e->getTrace());
             \DB::rollback();
+            $ret = $e;
         } finally {
             \DB::commit();
         }
+        return $ret;
+    }
 
-        $resource = new Item($cheatsheet, new CheatSheetTransformer());
+    private function jsonToModels($raw_data, $class) {
+        return $this->getMapper()->mapArray(json_decode($raw_data), [], $class);
+    }
 
-        $manager = new Manager();
-        $manager->setSerializer(new FractalDataSerializer());
-        return;
-        //return $manager->createData($resource)->toArray();
+    private function jsonToModel($raw_data, $class_instance) {
+        return $this->getMapper()->map(json_decode($raw_data), $class_instance);
+    }
+
+    private function getMapper() {
+        $mapper = new JsonMapper();
+        $mapper->bIgnoreVisibility = true;
+        return $mapper;
     }
 }
