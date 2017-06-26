@@ -104,8 +104,7 @@ if ($app->environment() !== 'production') {
 */
 
 $app->get('/', function () {
-    //TODO: redirect to app
-    return '<h1>Hello world!</h1>';
+    return redirect('https://play.google.com/store/apps/details?id=net.egordmitriev.cheatsheets');
 });
 
 $app->group(['namespace' => 'Admin\Controllers', 'prefix' => 'admin', 'middleware' => 'auth'], function ($app) {
