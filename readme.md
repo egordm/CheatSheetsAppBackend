@@ -1,21 +1,28 @@
-# Lumen PHP Framework
+# Programming Cheat Sheets
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+<p align=center>
+<a href='https://play.google.com/store/apps/details?id=net.egordmitriev.cheatsheets&utm_source=GITHUB&utm_campaign=GITHUB&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width=240 src='https://raw.githubusercontent.com/EgorDm/CheatSheetsApp/master/design/icon.png'/></a>
+</p>
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+<p align=center>
+<a href='https://play.google.com/store/apps/details?id=net.egordmitriev.cheatsheets&utm_source=GITHUB&utm_campaign=GITHUB&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width=240 src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+</p>
 
-## Official Documentation
+## About
+Programming Cheat Sheets - has more than 20 different cheat sheets to boost your productivity. App does not limit cheat sheets only to programming languages but also explores shortcuts for different applications and lists with good practises.
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+## Screenshots:
+<p>
+<img src='https://raw.githubusercontent.com/EgorDm/CheatSheetsApp/master/design/screenshots/Screenshot_2017-06-26-22-26-53-578_net.egordmitriev.cheatsheets.png' width=200/>
+<img src='https://raw.githubusercontent.com/EgorDm/CheatSheetsApp/master/design/screenshots/Screenshot_2017-06-26-22-29-39-679_net.egordmitriev.cheatsheets.png' width=200/>
+<img src='https://raw.githubusercontent.com/EgorDm/CheatSheetsApp/master/design/screenshots/Screenshot_2017-06-26-22-29-59-825_net.egordmitriev.cheatsheets.png' width=200/>
+<img src='https://raw.githubusercontent.com/EgorDm/CheatSheetsApp/master/design/screenshots/Screenshot_2017-06-26-22-31-07-054_net.egordmitriev.cheatsheets.png' width=200/>
+</p>
 
-## Security Vulnerabilities
+## Help and Contributing
+This app is completely Open Source. Feel free to contribute or submit issues if you have any. You can find code for app and backend on my github profile.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+If you have requests for some specific cheat sheets, please send me an email at egordmitriev2@gmail.com. I would be glad to help you.
 
-## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Google Play and the Google Play logo are trademarks of Google Inc.
