@@ -33,7 +33,7 @@ class MainController extends Controller
                 return $this->getManager()->createData($data)->toArray();
             });
         } else {
-            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
+            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES_BETA, 20000, function () {
                 $raw_data = Category::with(['cheat_sheets', 'cheat_sheets.tags'])->get();
                 $data = Category::transformArray($raw_data);
                 return $this->getManager()->createData($data)->toArray();
