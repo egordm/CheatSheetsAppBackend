@@ -33,11 +33,9 @@ class MainController extends Controller
                 return $this->getManager()->createData($data)->toArray();
             });
         } else {
-            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES_BETA, 20000, function () {
-                $raw_data = Category::with(['cheat_sheets', 'cheat_sheets.tags'])->get();
-                $data = Category::transformArray($raw_data);
-                return $this->getManager()->createData($data)->toArray();
-            });
+            $raw_data = Category::with(['cheat_sheets', 'cheat_sheets.tags'])->get();
+            $data = Category::transformArray($raw_data);
+            $ret = $this->getManager()->createData($data)->toArray();
         }
         return JsonResponse::create($ret);
     }
