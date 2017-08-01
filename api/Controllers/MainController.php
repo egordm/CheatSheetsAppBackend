@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\CheatSheet;
 use App\Models\Serializers\FractalDataSerializer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Input;
 use League\Fractal\Manager;
 
 class MainController extends Controller
@@ -22,11 +23,22 @@ class MainController extends Controller
 
     public function index()
     {
-        $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
-            $raw_data = Category::with('cheat_sheets', 'cheat_sheets.tags')->get();
-            $data = Category::transformArray($raw_data);
-            return $this->getManager()->createData($data)->toArray();
-        });
+        $beta = Input::get('beta', false);
+        if(!$beta) {
+            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
+                $raw_data = Category::with(['cheat_sheets' => function ($query) {
+                    $query->where(['beta' => false]);
+                }, 'cheat_sheets.tags'])->get();
+                $data = Category::transformArray($raw_data);
+                return $this->getManager()->createData($data)->toArray();
+            });
+        } else {
+            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
+                $raw_data = Category::with(['cheat_sheets', 'cheat_sheets.tags'])->get();
+                $data = Category::transformArray($raw_data);
+                return $this->getManager()->createData($data)->toArray();
+            });
+        }
         return JsonResponse::create($ret);
     }
 

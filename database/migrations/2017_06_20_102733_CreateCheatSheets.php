@@ -19,6 +19,7 @@ class CreateCheatSheets extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('beta')->default(1);
             $table->timestamps();
 
             $table->foreign('category_id')
