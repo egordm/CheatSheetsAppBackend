@@ -13,10 +13,12 @@ use App\Constants;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CheatSheet;
+use App\Models\PDF;
 use App\Models\Serializers\FractalDataSerializer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Input;
 use League\Fractal\Manager;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MainController extends Controller
 {
@@ -52,6 +54,12 @@ class MainController extends Controller
             return $this->getManager('cheat_groups')->createData($data)->toArray();
         });
         return JsonResponse::create($ret);
+    }
+
+    public function pdf($id) {
+        $pdf = PDF::whereCheatSheetId( $id)->first();
+        if ($pdf == null) throw new NotFoundHttpException();
+        return redirect($pdf->url);
     }
 
     /**

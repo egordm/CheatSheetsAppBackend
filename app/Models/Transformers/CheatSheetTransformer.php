@@ -24,6 +24,7 @@ class CheatSheetTransformer extends TransformerAbstract
     {
         return [
             'id' => $cheatSheet->id,
+            'type' => $cheatSheet->ctype,
             'title' => $cheatSheet->title,
             'subtitle' => $cheatSheet->subtitle,
             'description' => $cheatSheet->description,

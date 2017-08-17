@@ -32,6 +32,11 @@ use League\Fractal\Resource\Item;
  * @mixin \Illuminate\Database\Eloquent\
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CheatGroup[] $cheat_groups
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property int|null $beta
+ * @property int $ctype
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CheatSheet whereBeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CheatSheet whereCtype($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PDF[] $pdf
  */
 class CheatSheet extends BaseModel
 {
@@ -43,6 +48,10 @@ class CheatSheet extends BaseModel
     public function cheat_groups()
     {
         return $this->hasMany(CheatGroup::class);
+    }
+
+    public function pdf() {
+        return $this->hasMany(PDF::class);
     }
 
     /**
