@@ -33,6 +33,8 @@ use Admin\Models\BaseModel;
  */
 class CheatGroup extends BaseModel
 {
+    public $guarded = [];
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);

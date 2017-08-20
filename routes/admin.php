@@ -25,6 +25,7 @@ function resource($model, $controller)
 }
 
 resource('cheat-sheets', 'CheatSheetsController');
+resource('categories', 'CategoriesController');
 
 
 Route::post('/logout', 'UsersController@logout')->name('logout');

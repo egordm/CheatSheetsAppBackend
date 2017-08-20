@@ -26,6 +26,7 @@ use Admin\Models\BaseModel;
 class Tag extends BaseModel
 {
     public $timestamps = false;
+    public $guarded = [];
 
     public function cheat_sheet()
     {

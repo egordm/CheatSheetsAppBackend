@@ -27,6 +27,8 @@ class CheatContent extends BaseModel
 {
     use BelongsToThrough;
 
+    public $guarded = [];
+
     public $timestamps = false;
 
     public function cheat_sheet()

@@ -31,6 +31,8 @@ use League\Fractal\Resource\Collection;
  */
 class Category extends BaseModel
 {
+    public $guarded = [];
+
     public function cheat_sheets()
     {
         return $this->hasMany(CheatSheet::class);

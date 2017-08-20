@@ -15,9 +15,10 @@ use Admin\Fields\IntegerField;
 use Admin\Fields\RelationDropdown;
 use Admin\Fields\StringField;
 use Admin\Fields\TextField;
+use App\Models\Category;
 use App\Models\CheatSheet;
 
-class CheatSheetsPresenter extends Presenter
+class CategoriesPresenter extends Presenter
 {
     /**
      * CheatSheetsPresenter constructor.
@@ -27,9 +28,6 @@ class CheatSheetsPresenter extends Presenter
         parent::__construct([
             'id' => new IntegerField('id', 'ID', false),
             'title' => new StringField('title', 'Title', true, ['display' => true]),
-            'ctype' => new DropdownField('ctype', 'Type', ['Native', 'PDF']),
-            'category_id' => new RelationDropdown('category_id', 'Category', 'categories', 'title'),
-            'subtitle' => new StringField('subtitle', 'Subtitle', true, ['required' => false]),
             'description' => new TextField('description', 'Description', true, ['required' => false]),
             'beta' => new BooleanField('beta', 'Beta'),
             'created_at' => new DateTimeField('created_at', 'Created At', false),
@@ -42,21 +40,21 @@ class CheatSheetsPresenter extends Presenter
      */
     public function getModelClass()
     {
-        return CheatSheet::class;
+        return Category::class;
     }
 
     public function getIndexFields()
     {
-        return ['id', 'ctype', 'title', 'category_id', 'beta', 'updated_at'];
+        return ['id', 'title', 'beta', 'updated_at'];
     }
 
     public function getSearchFields()
     {
-        return ['id', 'ctype', 'title', 'subtitle', 'description'];
+        return ['id', 'title', 'description'];
     }
 
     public function getRouteName()
     {
-        return 'cheat-sheets';
+        return 'categories';
     }
 }

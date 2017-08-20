@@ -27,6 +27,8 @@ use Admin\Models\BaseModel;
  */
 class PDF extends BaseModel
 {
+    public $guarded = [];
+
     public function getTable()
     {
         return 'pdfs';

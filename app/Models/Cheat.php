@@ -41,6 +41,7 @@ class Cheat extends BaseModel
 {
     use BelongsToThrough;
 
+    public $guarded = [];
 
     public function tags()
     {

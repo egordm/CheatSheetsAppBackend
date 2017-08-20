@@ -28,6 +28,8 @@ class Note extends BaseModel
 {
     use BelongsToThrough;
 
+    public $guarded = [];
+
     public function cheat_sheet()
     {
         return $this->belongsToThrough(CheatSheet::class, CheatGroup::class);
