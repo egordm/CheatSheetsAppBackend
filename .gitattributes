@@ -1,0 +1,12 @@
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
+CHANGELOG.md export-ignore
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/storage/*
+/node_modules
