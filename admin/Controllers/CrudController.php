@@ -98,7 +98,7 @@ abstract class CrudController extends Controller //TODO: add repository structur
     {
         $inputs = $this->getRepository()->parseInputs($request->all());
         $model = $this->getRepository()->getModel($id);
-        $model->fill($request->all());
+        $model->fill($inputs);
 
         $validator = $this->getRepository()->validate($inputs);
         if($validator->fails()) {

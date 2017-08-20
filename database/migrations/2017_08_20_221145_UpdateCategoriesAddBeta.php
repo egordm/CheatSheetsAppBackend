@@ -14,7 +14,7 @@ class UpdateCategoriesAddBeta extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->boolean('beta')->default(1);
+            $table->boolean('beta')->default(0);
         });
     }
 

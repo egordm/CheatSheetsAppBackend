@@ -30,7 +30,7 @@ class MainController extends Controller
             $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
                 $raw_data = Category::with(['cheat_sheets' => function ($query) {
                     $query->where(['beta' => false]);
-                }, 'cheat_sheets.tags'])->get();
+                }, 'cheat_sheets.tags'])->where(['beta' => false])->get();
                 $data = Category::transformArray($raw_data);
                 return $this->getManager()->createData($data)->toArray();
             });
