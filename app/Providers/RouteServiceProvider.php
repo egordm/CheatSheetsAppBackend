@@ -41,7 +41,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapApiRoutes();
 
-        $this->mapAdminRoutes();
+        if(!env('PRODUCTION', 1)) {
+            $this->mapAdminRoutes();
+        }
+
     }
 
     /**
