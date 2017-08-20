@@ -12,6 +12,7 @@ namespace App\Observers;
 use Admin\Models\BaseModel;
 use App\Constants;
 use App\Models\Category;
+use Monolog\Logger;
 
 class CategoryObserver extends BaseObserver
 {

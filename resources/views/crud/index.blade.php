@@ -11,6 +11,7 @@
                     <a class="btn btn-primary d-inline" href="{{route("$route.create")}}" style="margin-left: 16px">Create</a>
                     <div class="float-right">
                         <form>
+                            {{csrf_field()}}
                             <input name="{{$route.'_query'}}" placeholder="Search" class="form-control d-inline"
                                    style="width: auto">
                             <button class="btn btn-primary d-inline">Submit</button>
@@ -45,6 +46,7 @@
                                     <a href="{{route("$route.show", ['id' => $model->id])}}" class="btn btn-sm btn-primary">View</a>
                                     <a href="{{route("$route.edit", ['id' => $model->id])}}" class="btn btn-sm btn-success">Edit</a>
                                     <form class="d-inline" method="post" action="{{route("$route.destroy", ['id' => $model->id])}}">
+                                        {{csrf_field()}}
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </form>
                                 </td>

@@ -9,6 +9,7 @@
                     <a class="btn btn-primary d-inline" href="{{route("$route.edit", ['id' => $model->id])}}"
                        style="margin-left: 16px">Edit</a>
                     <form action="{{route("$route.destroy", ['id' => $model->id])}}">
+                        {{csrf_field()}}
                         <button class="btn btn-danger d-inline" style="margin-left: 16px">Delete</button>
                     </form>
 

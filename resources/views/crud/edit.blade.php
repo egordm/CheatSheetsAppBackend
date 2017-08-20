@@ -5,6 +5,7 @@
         <div class="col-md-8">
             <form method="post"
                   action="{{$action == \Admin\Presenters\Presenter::ACTION_CREATE ? route("$route.store") : route("$route.update", ['id' => $model->id])}}">
+                {{csrf_field()}}
                 <div class="card">
                     <div class="card-header d-flex align-items-center" style="height: auto">
                         <h2 class="h5 display">{{$action == \Admin\Presenters\Presenter::ACTION_CREATE ? 'Create' : 'Edit'}}</h2>
