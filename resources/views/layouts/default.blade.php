@@ -46,16 +46,11 @@
 
     <!-- Main content -->
     <main class="main">
+
         <div class="container-fluid">
-            @php
-                if(isset($_SESSION['alert'])) {
-                    echo view('elements.alert', $_SESSION['alert']);
-                    unset($_SESSION['alert']);
-                }
-            @endphp
-            @if (isset($alert))
+            @foreach (session('flash_alert', collect()) as $alert)
                 @include('elements.alert', $alert)
-            @endif
+            @endforeach
             @yield('content')
         </div>
     </main>

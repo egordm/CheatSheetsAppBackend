@@ -35,6 +35,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        \Route::get('/', function () {
+            return redirect('https://play.google.com/store/apps/details?id=net.egordmitriev.cheatsheets');
+        });
+
         $this->mapApiRoutes();
 
         $this->mapAdminRoutes();

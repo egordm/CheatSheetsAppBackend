@@ -78,7 +78,7 @@ abstract class CrudController extends Controller //TODO: add repository structur
                 ->with('model', $request->all());
         }
 
-        // TODO: pass success
+        $this->alert('Succesfully created item', 'success');
         return redirect(route($this->getPresenter()->getRouteName() . '.index'));
     }
 
@@ -110,35 +110,19 @@ abstract class CrudController extends Controller //TODO: add repository structur
             return $this->getPresenter()->renderEdit($model,Presenter::ACTION_EDIT);
         }
 
-        // TODO: pass success
+        $this->alert('Succesfully updated item', 'success');
         return redirect(route($this->getPresenter()->getRouteName() . '.index'));
     }
 
     public function destroy($id)
     {
         $res = $this->getRepository()->delete($id);
-
         $this->alert('Succesfully deleted item', 'success');
         return redirect(route($this->getPresenter()->getRouteName() . '.index'));
     }
 
     protected function alert($message, $type = 'info')
     {
-        $_SESSION['alert'] = compact('message', 'type');
-    }
-
-
-    /**
-     * @return string
-     */
-
-    protected function validationRulesUpdate()
-    {
-        return [];
-    }
-
-    protected function validationRulesCreate()
-    {
-        return [];
+        \Session::flash('flash_alert', session('flash_alert', []) + [compact('message', 'type')]);
     }
 }

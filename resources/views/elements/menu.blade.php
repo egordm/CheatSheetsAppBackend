@@ -1,3 +1,5 @@
-<li class="nav-item">
-    <a class="nav-link" href="{{route('home')}}"><i class="icon-home"></i> Home</a>
-</li>
+@foreach(\Admin\Helpers\MenuHelper::getMenus() as $menu)
+    <li class="nav-item">
+        {!! $menu->render() !!}
+    </li>
+@endforeach
