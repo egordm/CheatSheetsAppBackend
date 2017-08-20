@@ -29,7 +29,11 @@
                 </div>
                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
                 <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+                <form action="{{route('logout')}}" method="post">
+                    {{ csrf_field() }}
+                    <button class="dropdown-item" type="submit"><i class="fa fa-lock"></i> Logout</button>
+                </form>
+
             </div>
         </li>
     </ul>

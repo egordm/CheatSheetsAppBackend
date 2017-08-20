@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Role;
-use Validator;
+use App\User;
 use Eloquent;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -24,7 +24,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins;
 
     /**
      * Where to redirect users after login / registration.
@@ -32,6 +32,8 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+
+    protected $redirectAfterLogout = 'admin/login';
 
     /**
      * Create a new authentication controller instance.
@@ -42,47 +44,47 @@ class AuthController extends Controller
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
-    
+
     public function showRegistrationForm()
     {
         $roleCount = Role::count();
-		if($roleCount != 0) {
-			$userCount = User::count();
-			if($userCount == 0) {
-				return view('auth.register');
-			} else {
-				return redirect('login');
-			}
-		} else {
-			return view('errors.error', [
-				'title' => 'Migration not completed',
-				'message' => 'Please run command <code>php artisan db:seed</code> to generate required table data.',
-			]);
-		}
+        if ($roleCount != 0) {
+            $userCount = User::count();
+            if ($userCount == 0) {
+                return view('auth.register');
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return view('errors.error', [
+                'title' => 'Migration not completed',
+                'message' => 'Please run command <code>php artisan db:seed</code> to generate required table data.',
+            ]);
+        }
     }
-    
+
     public function showLoginForm()
     {
-		$roleCount = Role::count();
-		if($roleCount != 0) {
-			$userCount = User::count();
-			if($userCount == 0) {
-				return redirect('register');
-			} else {
-				return view('auth.login');
-			}
-		} else {
-			return view('errors.error', [
-				'title' => 'Migration not completed',
-				'message' => 'Please run command <code>php artisan db:seed</code> to generate required table data.',
-			]);
-		}
+        $roleCount = Role::count();
+        if ($roleCount != 0) {
+            $userCount = User::count();
+            if ($userCount == 0) {
+                return redirect('register');
+            } else {
+                return view('auth.login');
+            }
+        } else {
+            return view('errors.error', [
+                'title' => 'Migration not completed',
+                'message' => 'Please run command <code>php artisan db:seed</code> to generate required table data.',
+            ]);
+        }
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -97,14 +99,14 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
         // TODO: This is Not Standard. Need to find alternative
         Eloquent::unguard();
-        
+
         $employee = Employee::create([
             'name' => $data['name'],
             'designation' => "Super Admin",
@@ -121,7 +123,7 @@ class AuthController extends Controller
             'date_left' => date("Y-m-d"),
             'salary_cur' => 0,
         ]);
-        
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -131,7 +133,7 @@ class AuthController extends Controller
         ]);
         $role = Role::where('name', 'SUPER_ADMIN')->first();
         $user->attachRole($role);
-    
+
         return $user;
     }
 }
