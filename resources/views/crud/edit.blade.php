@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="post"
-                  action="{{$action == \Admin\Presenters\Presenter::ACTION_CREATE ? route("$route.store") : route("$route.update", ['id' => $model->id])}}">
+                  action="{{$action == \Admin\Presenters\Presenter::ACTION_CREATE ? route("$route.store") : route("$route.update", ['id' => $model->getKey()])}}">
                 {{csrf_field()}}
                 <div class="card">
                     <div class="card-header d-flex align-items-center" style="height: auto">
@@ -12,8 +12,8 @@
                     </div>
                     <div class="card-block">
                         @foreach($fields as $field)
-                            {!! $field->render($model,
-                            (!empty($errors) && $errors->get($field->getName()) != null) ?  $errors->get($field->getName())[0] : null ) !!}
+                            {!! $field->renderInput($model,
+                            (!empty($errors) && $errors->get($field->getName()) != null) ?  $errors->get($field->getName())[0] : null) !!}
                         @endforeach
                     </div>
                     <div class="card-footer">

@@ -48,8 +48,11 @@ abstract class Presenter
     {
         $relations = [];
         foreach ($this->getRelations() as $key => $presenter) {
+            \Log::debug(json_encode($model->$key()->first()));
             $relations[] = $presenter->renderIndex($model->$key(), $inputs, true);
         }
+
+
 
         return view('crud.show', [
             'model' => $model,

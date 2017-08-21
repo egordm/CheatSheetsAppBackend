@@ -29,6 +29,8 @@ class PDF extends BaseModel
 {
     public $guarded = [];
 
+    protected $primaryKey = 'cheat_sheet_id';
+
     public function getTable()
     {
         return 'pdfs';

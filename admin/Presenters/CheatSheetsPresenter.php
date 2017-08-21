@@ -63,7 +63,7 @@ class CheatSheetsPresenter extends Presenter //TODO merge route & table
     public function getRelations()
     {
         return [
-
+            'pdf' => new PDFsPresenter(),
         ];
     }
 

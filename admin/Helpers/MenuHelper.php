@@ -20,6 +20,7 @@ class MenuHelper
             new LinkMenuItem(route('home'), 'Home', ['icon' => 'home']),
             new ModelItemMenuItem('categories', 'Categories', ['icon' => 'sort-alpha-asc']),
             new ModelItemMenuItem('cheat-sheets', 'Cheat Sheets', ['icon' => 'align-justify']),
+            new ModelItemMenuItem('pdfs', 'PDFs', ['icon' => 'align-justify']),
         ];
     }
 }

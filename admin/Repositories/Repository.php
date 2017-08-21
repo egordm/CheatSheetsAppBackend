@@ -74,7 +74,7 @@ class Repository
             if (empty($rule)) continue;
             $rules[$field->getName()] = implode('|', $rule);
         }
-        return Validator::make($data, $rules);
+        return \Validator::make($data, $rules);
     }
 
     /**

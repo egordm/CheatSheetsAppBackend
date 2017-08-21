@@ -6,9 +6,9 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center" style="height: auto">
                     <h2 class="h5 display">Show</h2>
-                    <a class="btn btn-primary d-inline" href="{{route("$route.edit", ['id' => $model->id])}}"
+                    <a class="btn btn-primary d-inline" href="{{route("$route.edit", ['id' => $model->getKey()])}}"
                        style="margin-left: 16px">Edit</a>
-                    <form action="{{route("$route.destroy", ['id' => $model->id])}}">
+                    <form action="{{route("$route.destroy", ['id' => $model->getKey()])}}">
                         {{csrf_field()}}
                         <button class="btn btn-danger d-inline" style="margin-left: 16px">Delete</button>
                     </form>
