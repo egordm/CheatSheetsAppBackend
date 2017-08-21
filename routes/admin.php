@@ -27,6 +27,9 @@
     resource('cheat-sheets', 'CheatSheetsController');
     resource('categories', 'CategoriesController');
     resource('pdfs', 'PDFsController');
+    resource('cheats', 'CheatsController');
+    resource('cheat-groups', 'CheatGroupsController');
+    resource('cheat-contents', 'CheatContentsController');
 });
 
 

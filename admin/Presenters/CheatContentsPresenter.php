@@ -8,7 +8,6 @@
 
 namespace Admin\Presenters;
 
-use Admin\Controllers\CheatGroupsController;
 use Admin\Fields\BooleanField;
 use Admin\Fields\DateTimeField;
 use Admin\Fields\DropdownField;
@@ -16,9 +15,13 @@ use Admin\Fields\IntegerField;
 use Admin\Fields\RelationDropdown;
 use Admin\Fields\StringField;
 use Admin\Fields\TextField;
-use App\Models\CheatSheet;
+use App\Models\Category;
+use App\Models\Cheat;
+use App\Models\CheatContent;
+use App\Models\CheatGroup;
+use App\Models\PDF;
 
-class CheatSheetsPresenter extends Presenter //TODO merge route & table
+class CheatContentsPresenter extends Presenter
 {
     /**
      * CheatSheetsPresenter constructor.
@@ -27,12 +30,8 @@ class CheatSheetsPresenter extends Presenter //TODO merge route & table
     {
         parent::__construct([
             'id' => new IntegerField('id', 'ID', false),
-            'title' => new StringField('title', 'Title', true),
-            'ctype' => new DropdownField('ctype', 'Type', ['Native', 'PDF']),
-            'category_id' => new RelationDropdown('category_id', 'Category', 'categories', 'title', ['route' => 'categories']),
-            'subtitle' => new StringField('subtitle', 'Subtitle', true, ['required' => false]),
-            'description' => new TextField('description', 'Description', true, ['required' => false]),
-            'beta' => new BooleanField('beta', 'Beta'),
+            'cheat_id' => new RelationDropdown('cheat_id', 'Cheat', 'cheats', 'description', ['route' => 'cheats']),
+            'content' => new TextField('content', 'Content', true),
             'created_at' => new DateTimeField('created_at', 'Created At', false),
             'updated_at' => new DateTimeField('updated_at', 'Updated At', false),
         ]);
@@ -43,34 +42,32 @@ class CheatSheetsPresenter extends Presenter //TODO merge route & table
      */
     public function getModelClass()
     {
-        return CheatSheet::class;
+        return CheatContent::class;
     }
 
     public function getIndexFields()
     {
-        return ['id', 'ctype', 'title', 'category_id', 'beta', 'updated_at'];
+        return ['id', 'cheat_id', 'content', 'updated_at'];
     }
 
     public function getSearchFields()
     {
-        return ['id', 'ctype', 'title', 'subtitle', 'description'];
+        return ['id','content', 'cheat_id'];
     }
 
     public function getRouteName()
     {
-        return 'cheat-sheets';
+        return 'cheat-contents';
     }
 
     public function getRelations()
     {
         return [
-            'pdf' => new PDFsPresenter(),
-            'cheat_groups' => new CheatGroupsPresenter(),
         ];
     }
 
     public function getTitle()
     {
-        return 'Cheat Sheets';
+        return 'Cheat Contents';
     }
 }

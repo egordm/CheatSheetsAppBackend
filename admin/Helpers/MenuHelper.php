@@ -21,6 +21,8 @@ class MenuHelper
             new ModelItemMenuItem('categories', 'Categories', ['icon' => 'sort-alpha-asc']),
             new ModelItemMenuItem('cheat-sheets', 'Cheat Sheets', ['icon' => 'align-justify']),
             new ModelItemMenuItem('pdfs', 'PDFs', ['icon' => 'align-justify']),
+            new ModelItemMenuItem('cheat-groups', 'Cheat Groups', ['icon' => 'align-justify']),
+            new ModelItemMenuItem('cheats', 'Cheats', ['icon' => 'align-justify']),
         ];
     }
 }
