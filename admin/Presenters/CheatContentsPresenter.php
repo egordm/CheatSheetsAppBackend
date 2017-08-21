@@ -32,8 +32,6 @@ class CheatContentsPresenter extends Presenter
             'id' => new IntegerField('id', 'ID', false),
             'cheat_id' => new RelationDropdown('cheat_id', 'Cheat', 'cheats', 'description', ['route' => 'cheats']),
             'content' => new TextField('content', 'Content', true),
-            'created_at' => new DateTimeField('created_at', 'Created At', false),
-            'updated_at' => new DateTimeField('updated_at', 'Updated At', false),
         ]);
     }
 
@@ -47,7 +45,7 @@ class CheatContentsPresenter extends Presenter
 
     public function getIndexFields()
     {
-        return ['id', 'cheat_id', 'content', 'updated_at'];
+        return ['id', 'cheat_id', 'content'];
     }
 
     public function getSearchFields()
