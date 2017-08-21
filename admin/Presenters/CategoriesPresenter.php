@@ -10,13 +10,10 @@ namespace Admin\Presenters;
 
 use Admin\Fields\BooleanField;
 use Admin\Fields\DateTimeField;
-use Admin\Fields\DropdownField;
 use Admin\Fields\IntegerField;
-use Admin\Fields\RelationDropdown;
 use Admin\Fields\StringField;
 use Admin\Fields\TextField;
 use App\Models\Category;
-use App\Models\CheatSheet;
 
 class CategoriesPresenter extends Presenter
 {
@@ -56,5 +53,17 @@ class CategoriesPresenter extends Presenter
     public function getRouteName()
     {
         return 'categories';
+    }
+
+    public function getRelations()
+    {
+        return [
+            'cheat_sheets' => new CheatSheetsPresenter(),
+        ];
+    }
+
+    public function getTitle()
+    {
+        return 'Categories';
     }
 }

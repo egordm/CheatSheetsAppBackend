@@ -29,4 +29,8 @@
             </div>
         </div>
     </div>
+
+    @foreach($relations as $relation)
+        {!! $relation !!}
+    @endforeach
 @stop

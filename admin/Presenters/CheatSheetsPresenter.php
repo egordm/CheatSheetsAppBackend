@@ -59,4 +59,16 @@ class CheatSheetsPresenter extends Presenter
     {
         return 'cheat-sheets';
     }
+
+    public function getRelations()
+    {
+        return [
+
+        ];
+    }
+
+    public function getTitle()
+    {
+        return 'Cheat Sheets';
+    }
 }

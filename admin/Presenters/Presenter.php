@@ -25,35 +25,43 @@ abstract class Presenter
     }
 
 
-    public function renderIndex($models, $inputs)
+    public function renderIndex($models, $inputs, $parent = null)
     {
-        if(!empty($inputs[$this->getRouteName().'_query'])) {
-            $models = $this->search($models, $inputs[$this->getRouteName().'_query']);
+        if (!empty($inputs[$this->getRouteName() . '_query'])) {
+            $models = $this->search($models, $inputs[$this->getRouteName() . '_query']);
         }
         $models = $models->paginate(15, ['*'], $this->getRouteName());
 
-        $fields = array_filter(array_values($this->getFields()), function($field) {
+        $fields = array_filter(array_values($this->getFields()), function ($field) {
             return in_array($field->getName(), $this->getIndexFields());
         });
-        return view('crud.index', [
+        return view(empty($parent) ? 'crud.index' : 'crud.partials.browse', [
+            'parent' => $parent,
+            'title' => $this->getTitle(),
             'models' => $models,
             'fields' => $fields,
             'route' => $this->getRouteName()
         ]);
     }
 
-    public function renderShow($model)
+    public function renderShow($model, $inputs = [])
     {
+        $relations = [];
+        foreach ($this->getRelations() as $key => $presenter) {
+            $relations[] = $presenter->renderIndex($model->$key(), $inputs, true);
+        }
+
         return view('crud.show', [
             'model' => $model,
             'fields' => array_values($this->getFields()),
-            'route' => $this->getRouteName()
+            'route' => $this->getRouteName(),
+            'relations' => $relations
         ]);
     }
 
     public function renderEdit($model = null, $action = self::ACTION_CREATE)
     {
-        $fields = array_filter(array_values($this->getFields()), function($field) {
+        $fields = array_filter(array_values($this->getFields()), function ($field) {
             return $field->isEditable();
         });
 
@@ -80,6 +88,10 @@ abstract class Presenter
     public abstract function getSearchFields();
 
     public abstract function getRouteName();
+
+    public abstract function getRelations();
+
+    public abstract function getTitle();
 
     protected function search($sql, $searchQuery)
     {

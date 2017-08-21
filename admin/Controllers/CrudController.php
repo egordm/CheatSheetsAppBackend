@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 use Monolog\Logger;
 
-abstract class CrudController extends Controller //TODO: add repository structure
+abstract class CrudController extends Controller
 {
     private $presenter;
     private $repository;
@@ -82,10 +82,10 @@ abstract class CrudController extends Controller //TODO: add repository structur
         return redirect(route($this->getPresenter()->getRouteName() . '.index'));
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $item = $this->getRepository()->getModel($id);
-        return $this->getPresenter()->renderShow($item);
+        return $this->getPresenter()->renderShow($item, $request->all());
     }
 
     public function edit($id)
