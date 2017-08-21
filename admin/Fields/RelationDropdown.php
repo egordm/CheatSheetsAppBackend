@@ -44,6 +44,17 @@ class RelationDropdown extends DropdownField
         return \DB::table($this->table)->find(intval($value), [$this->field]);
     }
 
+
+    public function formatModel($model)
+    {
+        $ret = parent::formatModel($model);
+        if(isset($this->params['route'])) {
+            $link = route($this->params['route'].'.show', ['id' => $model->{$this->getName()}]);
+            return "<a href='$link'>$ret</a>";
+        }
+        return $ret;
+    }
+
     public function format($value)
     {
         $relation = $this->getOption($value);

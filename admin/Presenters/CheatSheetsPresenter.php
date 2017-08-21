@@ -17,7 +17,7 @@ use Admin\Fields\StringField;
 use Admin\Fields\TextField;
 use App\Models\CheatSheet;
 
-class CheatSheetsPresenter extends Presenter
+class CheatSheetsPresenter extends Presenter //TODO merge route & table
 {
     /**
      * CheatSheetsPresenter constructor.
@@ -28,7 +28,7 @@ class CheatSheetsPresenter extends Presenter
             'id' => new IntegerField('id', 'ID', false),
             'title' => new StringField('title', 'Title', true, ['display' => true]),
             'ctype' => new DropdownField('ctype', 'Type', ['Native', 'PDF']),
-            'category_id' => new RelationDropdown('category_id', 'Category', 'categories', 'title'),
+            'category_id' => new RelationDropdown('category_id', 'Category', 'categories', 'title', ['route' => 'categories']),
             'subtitle' => new StringField('subtitle', 'Subtitle', true, ['required' => false]),
             'description' => new TextField('description', 'Description', true, ['required' => false]),
             'beta' => new BooleanField('beta', 'Beta'),

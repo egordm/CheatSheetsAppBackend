@@ -20,7 +20,7 @@
                         @foreach($fields as $field)
                             <tr>
                                 <td><b>{{$field->getLabel()}}</b></td>
-                                <td>{{$field->formatModel($model)}}</td>
+                                <td>{!! $field->formatModel($model) !!}</td>
                             </tr>
                         @endforeach
                         </tbody>

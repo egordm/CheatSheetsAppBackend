@@ -29,13 +29,7 @@
                         <tr>
                             @foreach($fields as $field)
                                 <td>
-                                    @if(!empty($field->getParams()['url']))
-                                        <a href="{{$field->getParams()['url']}}">
-                                            {{$field->formatModel($model)}}
-                                        </a>
-                                    @else
-                                        {{$field->formatModel($model)}}
-                                    @endif
+                                    {!! $field->formatModel($model) !!}
                                 </td>
                             @endforeach
                             <td>

@@ -30,7 +30,7 @@ abstract class Field
         $this->params = $params;
     }
 
-    public function render($model = null, $error = null)
+    public function renderInput($model = null, $error = null)
     {
         return view($this->getView(), ['field' => $this, 'model' => $model, 'error' => $error]);
     }
