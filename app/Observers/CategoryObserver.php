@@ -11,6 +11,7 @@ namespace App\Observers;
 
 use Admin\Models\BaseModel;
 use App\Constants;
+use App\Helpers\CacheHelper;
 use App\Models\Category;
 use Monolog\Logger;
 
@@ -21,6 +22,6 @@ class CategoryObserver extends BaseObserver
      */
     public function changed(BaseModel $model)
     {
-        \Cache::forget(Constants::CACHE_KEY_CATEGORIES);
+        CacheHelper::deleteCache(Constants::CACHE_KEY_CATEGORIES);
     }
 }

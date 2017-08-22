@@ -9,7 +9,8 @@
 namespace API\Requests;
 
 
-use API\Helpers\AppHelper;
+use App\Helpers\AppHelper;
+use App\Helpers\CacheHelper;
 use Illuminate\Http\Request;
 
 class ApiRequest extends Request
@@ -24,8 +25,8 @@ class ApiRequest extends Request
         return $this->get('beta', false);
     }
 
-    public function getCacheKey($key_identity)
+    public function getCacheKey($key)
     {
-        return $key_identity . '_' . $this->getVersion() . '_' . $this->getBeta();
+        return CacheHelper::formatCacheKey($key, $this->getVersion(), $this->getBeta());
     }
 }

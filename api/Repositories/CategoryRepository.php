@@ -9,7 +9,7 @@
 namespace API\Repositories;
 
 
-use API\Helpers\AppHelper;
+use App\Helpers\AppHelper;
 use App\Models\Category;
 use App\Models\CheatSheet;
 use App\Models\PDF;

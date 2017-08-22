@@ -9,16 +9,12 @@
 namespace API\Controllers;
 
 
-use API\Helpers\AppHelper;
 use API\Repositories\CategoryRepository;
 use API\Requests\ApiRequest;
 use App\Constants;
 use App\Http\Controllers\Controller;
-use App\Models\CheatSheet;
-use App\Models\PDF;
 use App\Models\Serializers\FractalDataSerializer;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Input;
 use League\Fractal\Manager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
