@@ -10,11 +10,13 @@ namespace API\Controllers;
 
 
 use API\Repositories\CategoryRepository;
-use API\Requests\ApiRequest;
 use App\Constants;
+use App\Helpers\AppHelper;
+use App\Helpers\CacheHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Serializers\FractalDataSerializer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -32,15 +34,19 @@ class MainController extends Controller
     }
 
 
-    public function index(ApiRequest $request)
+    public function index(Request $request)
     {
-        $retrieve_data = function () use ($request) {
-            $data = $this->repository->getCategories($request->getVersion(), $request->getBeta());
+        $version = $request->get('version', AppHelper::DEFAULT_VERSION);
+        $beta = $request->get('beta', false);
+
+        $retrieve_data = function () use ($version, $beta) {
+            $data = $this->repository->getCategories($version, $beta);
             return $this->getManager()->createData($data)->toArray();
         };
 
-        if (!$request->getBeta()) {
-            $ret = \Cache::remember($request->getCacheKey(Constants::CACHE_KEY_CATEGORIES), 20000, function () use ($retrieve_data) {
+        if (!$beta) {
+            $ret = \Cache::remember(CacheHelper::formatCacheKey(Constants::CACHE_KEY_CATEGORIES, $version, $beta),
+                20000, function () use ($retrieve_data) {
                 return $retrieve_data();
             });
         } else {
@@ -51,16 +57,20 @@ class MainController extends Controller
     }
 
 
-    public function cheatsheet(ApiRequest $request, $id)
+    public function cheatsheet(Request $request, $id)
     {
-        $retrieve_data = function () use ($request, $id) {
+        $version = $request->get('version', AppHelper::DEFAULT_VERSION);
+        $beta = $request->get('beta', false);
+
+        $retrieve_data = function () use ($id) {
             $data = $this->repository->getCheatSheet($id);
             if ($data == null) return $data;
             return $this->getManager('cheat_groups')->createData($data)->toArray();
         };
 
-        if (!$request->getBeta()) {
-            $ret = \Cache::remember(Constants::CACHE_KEY_PREFIX_CHEATSHEET . $id, 40000, function () use ($retrieve_data) {
+        if (!$beta) {
+            $ret = \Cache::remember(CacheHelper::formatCacheKey(Constants::CACHE_KEY_PREFIX_CHEATSHEET.$id, $version, $beta),
+                40000, function () use ($retrieve_data) {
                 return $retrieve_data();
             });
         } else {

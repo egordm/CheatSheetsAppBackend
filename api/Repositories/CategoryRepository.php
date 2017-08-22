@@ -18,10 +18,10 @@ class CategoryRepository
 {
 
 
-    public function getCategories($version = AppHelper::DEFAULT_VERSION, $beta = 0)
+    public function getCategories($version = AppHelper::DEFAULT_VERSION, $beta = false)
     {
         $sql = Category::with(['cheat_sheets' => function ($query) use ($beta, $version) {
-            $query = $query->orderBy('title', 'desc');
+            $query = $query->orderBy('title', 'asc');
             $query = $this->applyBeta($query, $beta);
             if ($version <= AppHelper::VERSION_1) {
                 $query = $query->where('ctype', CheatSheet::TYPE_NATIVE);
@@ -29,6 +29,7 @@ class CategoryRepository
             return $query;
         }, 'cheat_sheets.tags']);
         $data = $this->applyBeta($sql, $beta)->get();
+
         return Category::transformArray($data);
     }
 
@@ -45,9 +46,10 @@ class CategoryRepository
         return PDF::whereCheatSheetId($id)->first();
     }
 
-    private function applyBeta($sql, $beta = 0)
+    private function applyBeta($sql, $beta = false)
     {
-        if(!$beta) {
+        if(empty($beta)) {
+            \Log::debug('Applying beta' . empty($beta));
             $sql = $sql->where(['beta' => false]);
         }
         return $sql;
