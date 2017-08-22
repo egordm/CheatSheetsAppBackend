@@ -18,7 +18,6 @@ class CacheHelper
 
     public static function deleteCache($key)
     {
-        \Log::debug('Deleted cache');
         foreach (AppHelper::VERSIONS as $version) {
             \Cache::forget(self::formatCacheKey($key, $version, true));
             \Cache::forget(self::formatCacheKey($key, $version, false));
