@@ -9,9 +9,11 @@
 namespace API\Controllers;
 
 
+use API\Helpers\AppHelper;
+use API\Repositories\CategoryRepository;
+use API\Requests\ApiRequest;
 use App\Constants;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\CheatSheet;
 use App\Models\PDF;
 use App\Models\Serializers\FractalDataSerializer;
@@ -22,42 +24,60 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MainController extends Controller
 {
+    private $repository;
 
-    public function index()
+    /**
+     * MainController constructor.
+     * @param CategoryRepository $repository
+     */
+    public function __construct(CategoryRepository $repository)
     {
-        $beta = Input::get('beta', false);
-        if(!$beta) {
-            $ret = \Cache::remember(Constants::CACHE_KEY_CATEGORIES, 20000, function () {
-                $raw_data = Category::with(['cheat_sheets' => function ($query) {
-                    $query->where(['beta' => false]);
-                }, 'cheat_sheets.tags'])->where(['beta' => false])->get();
-                $data = Category::transformArray($raw_data);
-                return $this->getManager()->createData($data)->toArray();
+        $this->repository = $repository;
+    }
+
+
+    public function index(ApiRequest $request)
+    {
+        $retrieve_data = function () use ($request) {
+            $data = $this->repository->getCategories($request->getVersion(), $request->getBeta());
+            return $this->getManager()->createData($data)->toArray();
+        };
+
+        if (!$request->getBeta()) {
+            $ret = \Cache::remember($request->getCacheKey(Constants::CACHE_KEY_CATEGORIES), 20000, function () use ($retrieve_data) {
+                return $retrieve_data();
             });
         } else {
-            $raw_data = Category::with(['cheat_sheets', 'cheat_sheets.tags'])->get();
-            $data = Category::transformArray($raw_data);
-            $ret = $this->getManager()->createData($data)->toArray();
+            $ret = $retrieve_data();
         }
+
         return JsonResponse::create($ret);
     }
 
 
-    public function cheatsheet($id)
+    public function cheatsheet(ApiRequest $request, $id)
     {
-        $ret = \Cache::remember(Constants::CACHE_KEY_PREFIX_CHEATSHEET.$id, 40000, function () use ($id) {
-            $raw_data = CheatSheet::with('tags', 'cheat_groups', 'cheat_groups.tags', 'cheat_groups.notes',
-                'cheat_groups.cheats', 'cheat_groups.cheats.cheat_contents', 'cheat_groups.tags')->find($id);
-            //TODO: dont cache the 404 page :S
-            if (empty($raw_data)) return JsonResponse::create(['message' => 'Cheat sheet not found!'], 404);
-            $data = CheatSheet::transform($raw_data);
+        $retrieve_data = function () use ($request, $id) {
+            $data = $this->repository->getCheatSheet($id);
+            if ($data == null) return $data;
             return $this->getManager('cheat_groups')->createData($data)->toArray();
-        });
+        };
+
+        if (!$request->getBeta()) {
+            $ret = \Cache::remember(Constants::CACHE_KEY_PREFIX_CHEATSHEET . $id, 40000, function () use ($retrieve_data) {
+                return $retrieve_data();
+            });
+        } else {
+            $ret = $retrieve_data();
+        }
+
+        if(empty($ret)) return JsonResponse::create(['message' => 'Cheat sheet not found!'], 404);
         return JsonResponse::create($ret);
     }
 
-    public function pdf($id) {
-        $pdf = PDF::whereCheatSheetId( $id)->first();
+    public function pdf($id)
+    {
+        $pdf = $this->repository->getPDF($id);
         if ($pdf == null) throw new NotFoundHttpException();
         return redirect($pdf->url);
     }

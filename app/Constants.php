@@ -12,6 +12,5 @@ namespace App;
 class Constants
 {
     const CACHE_KEY_CATEGORIES = 'categories';
-    const CACHE_KEY_CATEGORIES_BETA = 'categories_beta';
     const CACHE_KEY_PREFIX_CHEATSHEET = 'cheatsheet_';
 }

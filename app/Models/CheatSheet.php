@@ -41,6 +41,9 @@ use League\Fractal\Resource\Item;
  */
 class CheatSheet extends BaseModel
 {
+    const TYPE_NATIVE = 0;
+    const TYPE_PDF = 1;
+
     public $guarded = [];
 
     public function tags()
