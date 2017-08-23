@@ -29,6 +29,9 @@ class CategoryRepository
             return $query;
         }, 'cheat_sheets.tags']);
         $data = $this->applyBeta($sql, $beta)->get();
+        $data = $data->filter(function ($value) {
+            return !empty($value->cheat_sheets) && count($value->cheat_sheets) > 0;
+        })->all();
 
         return Category::transformArray($data);
     }
